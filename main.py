@@ -53,6 +53,15 @@ def create_meeting():
 def list_meetings():
     return jsonify(meetings)
 
+# Tek toplantı listeleme (GET)
+@app.route('/api/v1/meetings/<int:id>', methods=['GET'])
+def get_meeting(id):
+    meeting = next((m for m in meetings if m['id'] == id), None)
+    if meeting:
+        return jsonify(meeting), 200
+    else:
+        return jsonify({'error': 'Meeting not found'}), 404
+
 # Toplantı güncelleme (PUT)
 @app.route('/api/v1/meetings/<int:id>', methods=['PUT'])
 def update_meeting(id):
