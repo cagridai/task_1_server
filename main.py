@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Geçici toplantı listesi
-meetings = [] #herhangi bir database kullanımından bahsedilmediği için en basit şekilde tasarladım
+meetings = [] # Herhangi bir database kullanımından bahsedilmediği için en basit şekilde tasarladım
 meeting_id_counter = 1
 
 # Toplantı oluşturma (POST)
@@ -44,11 +44,11 @@ def create_meeting():
         'end_time': end_time.strftime('%H:%M'),
         'participants': request.json.get('participants', [])
     }
-    meetings.append(meeting)
+    meetings.append(meeting) # Database olmadığı için meetingleri yukarıda oluşturduğum arrayde tutuyorum
     meeting_id_counter += 1
     return jsonify(meeting), 201
 
-# Toplantı listeleme (GET)
+# Tüm toplantıları listeleme (GET)
 @app.route('/api/v1/meetings', methods=['GET'])
 def list_meetings():
     return jsonify(meetings)
